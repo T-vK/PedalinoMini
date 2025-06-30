@@ -69,6 +69,8 @@ bool trim_page(unsigned int start, unsigned int len, bool lastcall = false) {
 
   if (saved > WEBPAGE_MEMORY_ALLOCATION) {
     DPRINT("Memory fragmentation warning: webpage memory allocation %d bytes greater then %d bytes reserved (requested %d bytes).\n%s\n", saved, WEBPAGE_MEMORY_ALLOCATION, len, page.c_str());
+    // Feed the watchdog during heavy page generation to prevent timeout
+    vTaskDelay(1);
   }
 
   if (fullPageCompleted) {
@@ -2699,7 +2701,7 @@ void get_pedals_page(unsigned int start, unsigned int len) {
     page += F("' min='0' max='");
     page += 100;
     page += F("' step='0.01' value='");
-    page += pedals[i-1].gain;
+    page += String(pedals[i-1].gain, 3);
     page += F("'>");
     page += F("<label for='gain");
     page += i;
@@ -2718,7 +2720,7 @@ void get_pedals_page(unsigned int start, unsigned int len) {
     page += F("' step='0.01' min='0' max='");
     page += 1;
     page += F("' value='");
-    page += pedals[i-1].retrigger;
+    page += String(pedals[i-1].retrigger, 3);
     page += F("'>");
     page += F("<label for='retrigger");
     page += i;
@@ -2798,7 +2800,7 @@ void get_pedals_page(unsigned int start, unsigned int len) {
     page += F("' step='0.01' min='0' max='");
     page += 100;
     page += F("' value='");
-    page += pedals[i-1].crosstalkRatio;
+    page += String(pedals[i-1].crosstalkRatio, 3);
     page += F("'>");
     page += F("<label for='crosstalkRatio");
     page += i;
