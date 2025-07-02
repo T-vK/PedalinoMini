@@ -175,16 +175,23 @@ RX0 - reserved (used for flashing)
 VIN - 5V
  */
 #undef  PEDALS
-#define PEDALS        12
+#define PEDALS        14
 #undef  LEDS
 #define LEDS          10
 #undef  SLOTS_ROWS
 #define SLOTS_ROWS    2
 #undef  SLOTS_COLS
-#define SLOTS_COLS    6
+#define SLOTS_COLS    7
 #define SLOTS         SLOTS_ROWS * SLOTS_COLS
-const byte pinD[] = {GPIO_NUM_12, GPIO_NUM_11, GPIO_NUM_10, GPIO_NUM_9,  GPIO_NUM_8,  GPIO_NUM_18, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_15, GPIO_NUM_7,  GPIO_NUM_6,  GPIO_NUM_5};
-const byte pinA[] = {GPIO_NUM_14, GPIO_NUM_13};
+/*
+Digital pins: GPIO_NUM_12, GPIO_NUM_11, GPIO_NUM_10, GPIO_NUM_9,  GPIO_NUM_8,  GPIO_NUM_18, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_15, GPIO_NUM_7,  GPIO_NUM_6,  GPIO_NUM_5
+Analog Pins: GPIO_NUM_14, GPIO_NUM_13
+Note by T-vK: 
+              - pinD and pinA both need to have the same length
+              - if pinD[x] is equal to pinA[x] it is treated as a digital pin and the value of pinD[x] will be used, otherwise it will be treated as an analog pin and the value of pinA[x] will be used
+*/
+const byte pinD[] = {GPIO_NUM_12, GPIO_NUM_11, GPIO_NUM_10, GPIO_NUM_9, GPIO_NUM_8, GPIO_NUM_18, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_15, GPIO_NUM_7, GPIO_NUM_6, GPIO_NUM_5, GPIO_NUM_38, GPIO_NUM_39};
+const byte pinA[] = {GPIO_NUM_12, GPIO_NUM_11, GPIO_NUM_10, GPIO_NUM_9, GPIO_NUM_8, GPIO_NUM_18, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_15, GPIO_NUM_7, GPIO_NUM_6, GPIO_NUM_5, GPIO_NUM_14, GPIO_NUM_13};
 #define FACTORY_DEFAULT_PIN   GPIO_NUM_0    // Button BOOT
 #define DIN_MIDI_IN_PIN       GPIO_NUM_2
 #define DIN_MIDI_OUT_PIN      GPIO_NUM_1
